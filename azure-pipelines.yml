@@ -1,0 +1,38 @@
+resources:
+  containers:
+  - container: docker_compose
+    image: tmaier/docker-compose:17.03
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+stages:
+- stage: building
+  jobs:
+  - job: build
+    steps:
+    - script: docker-compose build
+      displayName: 'Building networking and images'
+
+- stage: testing
+  dependsOn: building
+  condition: succeeded('building')
+  jobs:
+  - job: tests
+    steps:
+    - script: docker-compose up -d dvwa fast selenium
+      displayName: 'Containers coming up'
+    - script: docker-compose run --service-ports test
+      displayName: 'Recording tests'
+    - script: docker-compose run -e CI_MODE=testing -e TEST_RUN_URI=http://dvwa:80 fast
+      displayName: 'Running security tests'
+
+- stage: cleaning
+  dependsOn:
+  - building
+  - testing
+  condition: always()
+  jobs:
+  - job: cleanup
+    steps:
+    - script: docker-compose down
