@@ -1,16 +1,14 @@
 # README
 
-[![Build Status](https://dev.azure.com/apetriv/FAST/_apis/build/status/416e64726579.fast-example-azure-dvwa-integration?branchName=master)](https://dev.azure.com/apetriv/FAST/_build/latest?definitionId=4&branchName=master)
-
-This is an example of Wallarm FAST running security tests in the Azure DevOps pipeline. The target application is a DVWA.
+This is an example of Wallarm FAST running security tests in the Azure DevOps pipeline. The target application is DVWA.
 
 ## How to reproduce example
 
-1. Create your FAST node and get `WALLARM_API_TOKEN` here https://us1.my.wallarm.com/nodes
-2. Fork this repository
-3. Add project into Azure DevOps (first build will fail without `WALLARM_API_TOKEN`)
-4. Add env-variable `WALLARM_API_TOKEN` in the project settings
-5. Rerun build. It will find vulnerabilities
+1. Fork this repository.
+2. Create the FAST node and copy a token value by the [link](https://us1.my.wallarm.com/testing/nodes).
+3. Create a new pipleine for the forked repository in Azure DevOps.
+4. Configure the `WALLARM_API_TOKEN` variable with the copied token value.
+5. Run the pipeline.
 
 ## Useful links
 
