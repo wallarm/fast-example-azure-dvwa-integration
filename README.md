@@ -1,4 +1,4 @@
-# README
+# Example of running FAST tests for DVWA in Azure DevOps
 
 This is an example of Wallarm FAST running security tests in the Azure DevOps pipeline. The target application is DVWA.
 
